@@ -8,6 +8,6 @@ public class Main {
 
 	@GetMapping("/")
 	public String mainPage() {
-		return "mainPage";
+		return "redirect:/question/list";
 	}
 }
