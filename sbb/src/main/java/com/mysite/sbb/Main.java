@@ -10,4 +10,9 @@ public class Main {
 	public String mainPage() {
 		return "redirect:/question/list";
 	}
+	
+	@GetMapping("/dummy")
+	public String dummy() {
+		return "mainPage";
+	}
 }
