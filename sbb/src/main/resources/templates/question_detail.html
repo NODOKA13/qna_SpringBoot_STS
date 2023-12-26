@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Q&A - Question List</title>
+    <title>Q&A - MainPage</title>
 
 	<!-- css -->
 	<div th:insert="~{css :: css}"></div>
@@ -36,31 +36,37 @@
         		<div th:insert="~{topbar :: topbar}"></div>
                 <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-					
-	                <div class="card card-body">
-						<table>
-							<thead>
-								<tr>
-									<th>제목</th>
-									<th>작성일시</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="question: ${questionList}">
-									<td><a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a></td>
-									<td th:text="${question.createDate}"></td>
-								</tr>
-							</tbody>
-						</table>
-	                </div>		
-				<a th:href="@{/question/create}" class="btn btn-secondary">질문 등록하기</a>
-	                			
-                </div>
-                <!-- /.container-fluid -->
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+				
+				    <div class="card shadow mb-4">
+				
+				        <div class="card-header py-3">
+				            <h1 th:text="${question.subject}"></h1>
+				        </div>
+				        <div class="card-body" th:text="${question.content}"></div>
+				        <hr>
+				        <div>
+				            <ul>
+				                <li th:each="answer : ${question.answerList}" th:text="${answer.content}"></li>
+				            </ul>
+				        </div>
+				        <div class="row">
+				            <div class="col-md-3">
+				                <form th:action="@{|/answer/create/${question.id}|}" method="post" class="input-group">
+				                    <textarea class="form-control form-control-sm" name="content" id="content" rows="1"></textarea>
+				                    <div class="input-group-append">
+				                        <input class="btn btn-primary" type="submit" value="답변등록">
+				                    </div>
+				                </form>
+				            </div>
+				        </div>
+				    </div>
+				
+				</div>
+				<!-- /.container-fluid -->
 
-            </div>
+            	</div>
             <!-- End of Main Content -->
         	<div th:insert="~{footer :: footer}"></div>
             <!-- Footer -->
